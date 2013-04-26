@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 
-import com.base.word.JPWord;
+import com.base.word.bean.JPWord;
+import com.base.word.bean.RemStatusBean;
 import com.base.word.util.DBUtil;
 
 public class JPWordDao {
@@ -75,5 +76,11 @@ public class JPWordDao {
 		stmt.setInt(5, word.getWordId());
 		stmt.executeUpdate();
 		stmt.close();		
+	}
+	public void saveStatus(RemStatusBean status) {
+		for (int i = 0; i < status.getLevelCountLength(); i++) {
+			if (status.getLevelCount(0) == 0) continue;
+		}
+		String sql = "insert into ";
 	}
 }

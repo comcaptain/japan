@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Wed Apr 24 13:30:59 JST 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-013e-3a4f-0b7d-000000a883a0 
-on database directory D:\sgq\jpword\japan\derbydb\jpdb with class loader sun.misc.Launcher$AppClassLoader@1e97f9f 
+Fri Apr 26 18:44:26 JST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-013e-45ba-bf56-000000c6c7b0 
+on database directory D:\sgq\jpword\japan\derbydb\jpdb with class loader sun.misc.Launcher$AppClassLoader@de6ced 
 Loaded from file:/D:/sgq/jpword/japan/lib/derby.jar
-java.vendor=Oracle Corporation
-java.runtime.version=1.7.0_21-b11
+java.vendor=Sun Microsystems Inc.
+java.runtime.version=1.6.0_39-b04
 user.dir=D:\sgq\jpword\japan
 os.name=Windows 7
 os.arch=x86

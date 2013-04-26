@@ -1,4 +1,4 @@
-package com.base.word;
+package com.base.word.bean;
 
 import java.io.Serializable;
 

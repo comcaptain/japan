@@ -1,6 +1,5 @@
 package com.base.word.bean;
 
-import com.base.word.WordSet;
 import com.base.word.util.RemClock;
 
 public class RemStatusBean {
@@ -8,6 +7,9 @@ public class RemStatusBean {
 	private UserConfigBean userConfig;
 	private RemClock clock;
 	private WordSet wordSet;
+	public int getLevelCountLength() {
+		return levelCount.length;
+	}
 	public void addLevelCount(int level) {
 		levelCount[level]++;
 	}

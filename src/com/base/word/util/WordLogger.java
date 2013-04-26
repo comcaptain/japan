@@ -1,6 +1,6 @@
 package com.base.word.util;
 
-import com.base.word.JPWord;
+import com.base.word.bean.JPWord;
 
 public class WordLogger {
 	public static String getWordStr(String wordFilter, JPWord word) {

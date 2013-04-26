@@ -4,17 +4,21 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.base.word.JPWord;
-import com.base.word.WordSet;
+import com.base.word.bean.JPWord;
+import com.base.word.bean.RemStatusBean;
 import com.base.word.bean.UserConfigBean;
+import com.base.word.bean.WordSet;
+import com.base.word.dao.JPWordDao;
 
-public class CommandAnalyzer {
+public class CommandExecutor {
 	private WordSet wordSet;
 	private Map<String, Integer> paramCounts = new HashMap<String, Integer>();
 	private UserConfigBean userConfig;
+	private JPWordDao dao;
 	
 
-	public CommandAnalyzer(WordSet wordSet, UserConfigBean userConfig) {
+	public CommandExecutor(WordSet wordSet, UserConfigBean userConfig) {
+		this.dao = new JPWordDao();
 		this.userConfig = userConfig;
 		this.wordSet = wordSet;
 		this.paramCounts.put("-f", 1);
@@ -33,11 +37,13 @@ public class CommandAnalyzer {
 		this.paramCounts.put("a", 0);
 	}
 	
-	public int execute(String inputStr, JPWord word, RemClock clock) throws SQLException {
+	public int execute(String inputStr, JPWord word, RemStatusBean status) throws SQLException {
 		String[] params = inputStr.split(" +");
 		String command = params[0].trim();
 		if (isNum(command)) {
-			setNewLevel(word, Integer.parseInt(command));
+			int newLevel = Integer.parseInt(command);
+			setNewLevel(word, newLevel);
+			status.addLevelCount(newLevel);
 			return JPWordConstants.WORD_NEXT;
 		}
 		if (paramCounts.get(command) == null) {
@@ -84,11 +90,11 @@ public class CommandAnalyzer {
 			return JPWordConstants.SKIP;
 		}
 		else if (command.equals("pause")) {
-			clock.pause();
+			status.getClock().pause();
 			return JPWordConstants.CLOCK_PAUSE;
 		}
 		else if (command.equals("start")) {
-			clock.start();
+			status.getClock().start();
 			return JPWordConstants.CLOCK_START;
 		}		
 		return JPWordConstants.WORD_NEXT;
@@ -167,5 +173,9 @@ public class CommandAnalyzer {
 			levelList = command.split("\\s");
 		}
 		userConfig.setLevelList(levelList);
+	}
+
+	public void saveRecord(RemStatusBean status) {
+		dao.saveStatus(status);
 	}
 }

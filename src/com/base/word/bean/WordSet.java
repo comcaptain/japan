@@ -1,8 +1,7 @@
-package com.base.word;
+package com.base.word.bean;
 
 import java.sql.SQLException;
 
-import com.base.word.bean.UserConfigBean;
 import com.base.word.dao.JPWordDao;
 
 public class WordSet {
