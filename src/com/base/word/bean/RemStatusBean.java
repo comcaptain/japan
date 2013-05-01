@@ -7,11 +7,16 @@ public class RemStatusBean {
 	private UserConfigBean userConfig;
 	private RemClock clock;
 	private WordSet wordSet;
+	private int wordCount;
 	public int getLevelCountLength() {
 		return levelCount.length;
 	}
 	public void addLevelCount(int level) {
+		wordCount++;
 		levelCount[level]++;
+	}
+	public int getWordCount() {
+		return wordCount;
 	}
 	public int getLevelCount(int level) {
 		return levelCount[level];

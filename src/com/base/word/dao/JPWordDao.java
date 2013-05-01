@@ -77,10 +77,36 @@ public class JPWordDao {
 		stmt.executeUpdate();
 		stmt.close();		
 	}
-	public void saveStatus(RemStatusBean status) {
-		for (int i = 0; i < status.getLevelCountLength(); i++) {
-			if (status.getLevelCount(0) == 0) continue;
+	public void saveStatus(RemStatusBean status) throws SQLException {
+		try {
+			conn.setAutoCommit(false);
+			Statement stmt = conn.createStatement();
+			String sql = "select max(record_id) as maxid from mem_record";
+			ResultSet rs = stmt.executeQuery(sql);
+			int recordId = 1;
+			if (rs.next() && rs.getObject("maxid") != null) {
+				int maxid = rs.getInt("maxid");
+				recordId = maxid + 1;
+			}
+			sql = "insert into mem_record(record_id, timelength, wordnum) values(" + recordId +
+					" ," + status.getClock().getEclapsed() + 
+							", " + status.getWordCount() + ")";
+			stmt.executeUpdate(sql);
+			for (int i = 0; i < status.getLevelCountLength(); i++) {
+				if (status.getLevelCount(i) == 0) continue;
+				sql = "insert into level_record(record_id, level, wordnum) values(" + recordId + 
+						"," + i +
+						" ," + status.getLevelCount(i) + 
+						" )";
+				stmt.executeUpdate(sql);
+			}
+			conn.commit();
+		} catch (SQLException e) {
+			conn.rollback();
+			e.printStackTrace();
 		}
-		String sql = "insert into ";
+		finally {
+			conn.setAutoCommit(true);
+		}
 	}
 }

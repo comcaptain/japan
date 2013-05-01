@@ -66,6 +66,7 @@ public class CommandExecutor {
 		}
 		else if (command.equals("-t")) {
 			trim(word);
+			return JPWordConstants.SHOW_ALL;
 		}
 		else if (command.equals("-sj")) {
 			wordSet.setJPWord(word, params[1]);
@@ -97,7 +98,7 @@ public class CommandExecutor {
 			status.getClock().start();
 			return JPWordConstants.CLOCK_START;
 		}		
-		return JPWordConstants.WORD_NEXT;
+		return JPWordConstants.DO_NOTHING;
 	}
 	private void setNewLevel(JPWord word, int newLevel) throws SQLException {
 		if (word.getLevel() == null) word.setLevel(newLevel + "");
@@ -138,8 +139,8 @@ public class CommandExecutor {
 	private void find(JPWord inWord, String hanzi) {
 		int count = 0;
 		for (JPWord word: this.wordSet.getWords()) {
-			if (word.getHanzi().contains(hanzi + "")) {
-				System.out.println(WordLogger.getWordStr(userConfig.getWordFilter(), word));
+			if (word.getHanzi() != null && word.getHanzi().contains(hanzi + "")) {
+				System.out.println(WordLogger.getWordStr(JPWordConstants.SHOW_ALL_FILTER, word));
 				count++;
 			}
 		}
@@ -175,7 +176,7 @@ public class CommandExecutor {
 		userConfig.setLevelList(levelList);
 	}
 
-	public void saveRecord(RemStatusBean status) {
+	public void saveRecord(RemStatusBean status) throws SQLException {
 		dao.saveStatus(status);
 	}
 }

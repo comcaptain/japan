@@ -10,4 +10,6 @@ public interface JPWordConstants {
 	public static final int SHOW_ALL = 15;
 	//对应0 1 2，最后一个表示默认
 	public static final String[] LEVEL_SHOW = {"×", "●", "○", "□"};
+	public static final int DO_NOTHING = 16;
+	public static final String SHOW_ALL_FILTER = "a";
 }

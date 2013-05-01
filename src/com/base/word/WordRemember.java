@@ -81,6 +81,8 @@ public class WordRemember {
 			case JPWordConstants.SHOW_ALL:
 				System.out.println(WordLogger.getWordStr("a", words[i]));
 				break;
+			case JPWordConstants.DO_NOTHING:
+				break;
 			}
 		}
 	}
