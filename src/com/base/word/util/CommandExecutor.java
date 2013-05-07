@@ -35,6 +35,7 @@ public class CommandExecutor {
 		this.paramCounts.put("pause", 0);
 		this.paramCounts.put("start", 0);
 		this.paramCounts.put("a", 0);
+		this.paramCounts.put("count", 0);
 	}
 	
 	public int execute(String inputStr, JPWord word, RemStatusBean status) throws SQLException {
@@ -62,7 +63,7 @@ public class CommandExecutor {
 			return JPWordConstants.SHOW_ALL;
 		}	
 		else if (command.equals("-f")) {
-			find(word, params[1]);
+			find(params[1]);
 		}
 		else if (command.equals("-t")) {
 			trim(word);
@@ -98,8 +99,27 @@ public class CommandExecutor {
 			status.getClock().start();
 			return JPWordConstants.CLOCK_START;
 		}		
+		else if (command.equals("count")) {
+			showCounts();
+		}		
 		return JPWordConstants.DO_NOTHING;
 	}
+	private void showCounts() {
+		HashMap<String, Integer> counts = new HashMap<String, Integer>();
+		for (JPWord word: this.wordSet.getWords()) {
+			Integer temp = counts.get(word.getLevel());
+			if (temp == null) {
+				counts.put(word.getLevel(), 1);
+			}
+			else {
+				counts.put(word.getLevel(), temp.intValue() + 1);
+			}
+		}
+		for (String key: counts.keySet()) {
+			System.out.println(WordLogger.getLevelStr(key) + "\t" + counts.get(key));
+		}
+	}
+
 	private void setNewLevel(JPWord word, int newLevel) throws SQLException {
 		if (word.getLevel() == null) word.setLevel(newLevel + "");
 		else {
@@ -132,13 +152,13 @@ public class CommandExecutor {
 		wordSet.saveWord(word);
 	}
 
-	private void findN(JPWord inWord, String index) {
+	private void findN(JPWord inWord, String index) throws SQLException {
 		char hanzi = inWord.getHanzi().charAt(Integer.parseInt(index) - 1);
-		find(inWord, hanzi + "");
+		find(hanzi + "");
 	}
-	private void find(JPWord inWord, String hanzi) {
+	private void find(String hanzi) throws SQLException {
 		int count = 0;
-		for (JPWord word: this.wordSet.getWords()) {
+		for (JPWord word: this.dao.findWords(hanzi)) {
 			if (word.getHanzi() != null && word.getHanzi().contains(hanzi + "")) {
 				System.out.println(WordLogger.getWordStr(JPWordConstants.SHOW_ALL_FILTER, word));
 				count++;

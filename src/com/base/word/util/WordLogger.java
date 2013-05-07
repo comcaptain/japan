@@ -15,7 +15,7 @@ public class WordLogger {
 		if (allShow || wordFilter.indexOf('c') >= 0) strBuff.append("【" + word.getCnWord() + "】");
 		return strBuff.toString();
 	}
-	private static String getLevelStr(String level) {
+	public static String getLevelStr(String level) {
 		if (level == null) return JPWordConstants.LEVEL_SHOW[JPWordConstants.LEVEL_SHOW.length - 1];
 		String result = "";
 		for (char temp: level.toCharArray()) {

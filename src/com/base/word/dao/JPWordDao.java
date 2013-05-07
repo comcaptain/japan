@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+import java.util.List;
 
 import com.base.word.bean.JPWord;
 import com.base.word.bean.RemStatusBean;
@@ -34,11 +35,11 @@ public class JPWordDao {
 		String sql = "select * from jpword where wordid = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, wordId);		
-		JPWord result = getSingleWord(stmt.executeQuery());
+		JPWord result = getJPWord(stmt.executeQuery());
 		stmt.close();
 		return result;
 	}
-	private JPWord getSingleWord(ResultSet rs) throws SQLException {
+	private JPWord getJPWord(ResultSet rs) throws SQLException {
 		if (!rs.next()) return null;
 		JPWord result = new JPWord();
 		result.setWordId(rs.getInt("wordid"));
@@ -56,11 +57,18 @@ public class JPWordDao {
 		boolean unitFilter = unitList != null;
 		boolean levelFilter = levelList != null;
 		if (unitFilter) sql += " and unit in " + DBUtil.getDerbyArray(unitList);
-		if (levelFilter) sql += " and level in " + DBUtil.getDerbyArray(levelList);
+		if (levelFilter) {
+			if (levelList.length == 1 && levelList[0].equals("d")) {
+				sql += " and level is NULL";
+			}
+			else {
+				sql += " and level in " + DBUtil.getDerbyArray(levelList);
+			}
+		}
 		Statement stmt = conn.createStatement();
 		JPWord word;
 		ResultSet rs = stmt.executeQuery(sql);
-		while ((word = getSingleWord(rs)) != null) {
+		while ((word = getJPWord(rs)) != null) {
 			words.add(word);
 		}
 		stmt.close();
@@ -108,5 +116,17 @@ public class JPWordDao {
 		finally {
 			conn.setAutoCommit(true);
 		}
+	}
+	public List<JPWord> findWords(String hanzi) throws SQLException {
+		List<JPWord> wordList = new LinkedList<JPWord>();
+		Statement stmt = this.conn.createStatement();
+		String sql = "select * from jpword where hanzi like '%" + hanzi + 
+				"%'";
+		ResultSet rs = stmt.executeQuery(sql);
+		JPWord word = null;
+		while ((word = this.getJPWord(rs)) != null) {
+			wordList.add(word);
+		}
+		return wordList;
 	}
 }
