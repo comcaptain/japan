@@ -55,8 +55,8 @@ public class WordRemember {
 		status.setClock(clock);
 		boolean showNext = true;
 		clock.start();
-		boolean save = false;
-		for (int i = 0;i < words.length;) {
+		boolean save = false;int i = 0;
+		while (i < words.length) {
 			if (showNext)
 				System.out.println(WordLogger.getWordStr(userConfig.getWordFilter(), words[i])); 
 			showNext = false;
@@ -78,13 +78,13 @@ public class WordRemember {
 				showStatus(clock, words.length, i);
 				break;
 			case JPWordConstants.SHOW_ALL:
-				System.out.println(WordLogger.getWordStr("a", words[i]));
+				System.out.println(WordLogger.getWordStr(UserConfigBean.wordFilterAll, status.getCurrentShowWord()));
 				break;
 			case JPWordConstants.DO_NOTHING:
 				break;
 			}
 		}
-		if (save) {
+		if ((words.length > 0 && i == words.length) || save) {
 			executor.saveRecord(status);
 			System.out.println("背诵记录保存成功，谢谢使用~");			
 		}
@@ -92,10 +92,10 @@ public class WordRemember {
 	private static void showStatus(RemClock clock, int total, int passed) {
 		clock.predict(total, passed);
 		System.out.println(JPWordConstants.LEVEL_SHOW[0] + status.getLevelCount(0) + "\t" + 
-				clock.getSpeed() + "\t♠" + total);
+				clock.getSpeed() + "\t☆" + total);
 		System.out.println(JPWordConstants.LEVEL_SHOW[1] + status.getLevelCount(1) + "\t" + 
-				clock.toString() + "\t♦" + passed);
+				clock.toString() + "\t☆" + passed);
 		System.out.println(JPWordConstants.LEVEL_SHOW[2] + status.getLevelCount(2) + "\t" + 
-				clock.getRest() + "\t♥" + (total - passed));
+				clock.getRest() + "\t☆" + (total - passed));
 	}
 }

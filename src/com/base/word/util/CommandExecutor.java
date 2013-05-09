@@ -24,10 +24,11 @@ public class CommandExecutor {
 		this.paramCounts.put("-f", 1);
 		this.paramCounts.put("-fn", 1);
 		this.paramCounts.put("-t", 0);
-		this.paramCounts.put("-sj", 1);
-		this.paramCounts.put("-sh", 1);
-		this.paramCounts.put("-sc", 1);
-		this.paramCounts.put("-sl", 1);
+		this.paramCounts.put("-sj", -2);
+		this.paramCounts.put("-sh", -2);
+		this.paramCounts.put("-sc", -2);
+		this.paramCounts.put("-sl", -2);
+		this.paramCounts.put("-st", -2);
 		this.paramCounts.put("ls", 0);
 		this.paramCounts.put("s", 0);
 		this.paramCounts.put("exit", 0);
@@ -52,10 +53,19 @@ public class CommandExecutor {
 			return JPWordConstants.BAD_INPUT;
 		}
 		int paramCount = paramCounts.get(command);
-		if (!(paramCount == params.length - 1 || paramCount == params.length - 2)) {
+		//说明中间指定了单词id
+		if (paramCount < 0 && -paramCount == params.length - 1) {
+			word = dao.getWordById(Integer.parseInt(params[1]));
+			params[1] = params[2];
+		}
+		//说明中间没有指定单词id
+		else if (paramCount == params.length - 1 || -paramCount == params.length) {			
+		}
+		else {
 			System.out.println("参数数量不对");
 			return JPWordConstants.BAD_INPUT;
 		}
+		status.setCurrentShowWord(word);
 		if (command.equals("-fn")) {
 			findN(word, params[1]);
 		}
@@ -83,6 +93,10 @@ public class CommandExecutor {
 		}
 		else if (command.equals("-sc")) {
 			wordSet.setCNWord(word, params[1]);
+			return JPWordConstants.SHOW_ALL;
+		}
+		else if (command.equals("-st")) {
+			wordSet.setType(word, params[1]);
 			return JPWordConstants.SHOW_ALL;
 		}
 		else if (command.equals("ls")) {
@@ -139,11 +153,32 @@ public class CommandExecutor {
 	}
 
 	private void listWords() {
-		for (JPWord word: this.wordSet.getWords()) {
-			System.out.println(WordLogger.getWordStr(userConfig.getWordFilter(), word));
-		}
-		System.out.println("共有个" + this.wordSet.getWords().length + "单词");
+		formatListWords(this.wordSet.getWords(), userConfig.getWordFilter());
 	}
+	
+	private void formatListWords(JPWord[] words, int[] wordFilter) {
+		HashMap<Integer, Integer> maxLengths = new HashMap<Integer, Integer>();
+		//取得单词各个显示部分的最大长度
+		for (JPWord word: words) {
+			for (int wordPart: wordFilter) {
+				String value = word.getString(wordPart);
+				//因为null在屏幕上显示为null，所以取4
+				int length = WordLogger.getWordPartLength(value, wordPart);
+				if (maxLengths.get(wordPart) == null) {
+					maxLengths.put(wordPart, length);
+				}
+				else {
+					int maxLength = maxLengths.get(wordPart);
+					if (length > maxLength) maxLengths.put(wordPart, length);
+				}
+			}
+		}
+		for (JPWord word:words) {
+			System.out.println(WordLogger.getWordStr(wordFilter, word, maxLengths));
+		}
+		System.out.println("共有" + words.length + "个单词");		
+	}
+	
 
 	private void trim(JPWord word) throws SQLException {
 		if (word.getCnWord() != null) word.setCnWord(word.getCnWord().trim());
@@ -157,14 +192,7 @@ public class CommandExecutor {
 		find(hanzi + "");
 	}
 	private void find(String hanzi) throws SQLException {
-		int count = 0;
-		for (JPWord word: this.dao.findWords(hanzi)) {
-			if (word.getHanzi() != null && word.getHanzi().contains(hanzi + "")) {
-				System.out.println(WordLogger.getWordStr(JPWordConstants.SHOW_ALL_FILTER, word));
-				count++;
-			}
-		}
-		System.out.println("一共找到个" + count + "单词");
+		formatListWords(this.dao.findWords(hanzi), UserConfigBean.wordFilterAll);
 	}
 
 	public static void setUnitList(String command, UserConfigBean userConfig) {

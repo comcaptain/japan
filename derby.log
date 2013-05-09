@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Tue May 07 15:46:44 JST 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-013e-7dbe-00f5-000000a4b7c8 
-on database directory C:\Users\base\Documents\GitHub\japan\derbydb\jpdb with class loader sun.misc.Launcher$AppClassLoader@1e97f9f 
-Loaded from file:/C:/Users/base/Documents/GitHub/japan/lib/derby.jar
+Thu May 09 10:22:17 JST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-013e-86e1-aeaf-000000bb2758 
+on database directory C:\Users\base\Documents\GitHub\japan\derbydb\jpdb with class loader java.net.URLClassLoader@1f297e7 
+Loaded from jar:rsrc:derby.jar!/
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_21-b11
-user.dir=C:\Users\base\Documents\GitHub\japan
+user.dir=c:\Users\base\Documents\GitHub\japan
 os.name=Windows 7
 os.arch=x86
 os.version=6.1

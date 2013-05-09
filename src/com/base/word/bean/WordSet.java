@@ -56,4 +56,8 @@ public class WordSet {
 		word.setLevel(value);
 		dao.saveWord(word);
 	}
+	public void setType(JPWord word, String type) throws SQLException {
+		word.setType(type);
+		dao.saveWord(word);
+	}
 }

@@ -75,13 +75,14 @@ public class JPWordDao {
 		return words.toArray(new JPWord[0]);
 	}
 	public void saveWord(JPWord word) throws SQLException {
-		String sql = "update jpword set level=?, jpword=?, cnword=?, hanzi=? where wordid=?";
+		String sql = "update jpword set level=?, jpword=?, cnword=?, hanzi=?, type=? where wordid=?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, word.getLevel());
 		stmt.setString(2, word.getJpWord());
 		stmt.setString(3, word.getCnWord());
 		stmt.setString(4, word.getHanzi());
-		stmt.setInt(5, word.getWordId());
+		stmt.setString(5, word.getType());
+		stmt.setInt(6, word.getWordId());
 		stmt.executeUpdate();
 		stmt.close();		
 	}
@@ -117,7 +118,7 @@ public class JPWordDao {
 			conn.setAutoCommit(true);
 		}
 	}
-	public List<JPWord> findWords(String hanzi) throws SQLException {
+	public JPWord[] findWords(String hanzi) throws SQLException {
 		List<JPWord> wordList = new LinkedList<JPWord>();
 		Statement stmt = this.conn.createStatement();
 		String sql = "select * from jpword where hanzi like '%" + hanzi + 
@@ -127,6 +128,6 @@ public class JPWordDao {
 		while ((word = this.getJPWord(rs)) != null) {
 			wordList.add(word);
 		}
-		return wordList;
+		return wordList.toArray(new JPWord[0]);
 	}
 }

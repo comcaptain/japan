@@ -8,6 +8,7 @@ public class RemStatusBean {
 	private RemClock clock;
 	private WordSet wordSet;
 	private int wordCount;
+	private JPWord currentShowWord;
 	public int getLevelCountLength() {
 		return levelCount.length;
 	}
@@ -38,5 +39,11 @@ public class RemStatusBean {
 	}
 	public void setWordSet(WordSet wordSet) {
 		this.wordSet = wordSet;
+	}
+	public JPWord getCurrentShowWord() {
+		return currentShowWord;
+	}
+	public void setCurrentShowWord(JPWord currentShowWord) {
+		this.currentShowWord = currentShowWord;
 	}
 }

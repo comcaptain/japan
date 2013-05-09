@@ -12,4 +12,12 @@ public interface JPWordConstants {
 	public static final String[] LEVEL_SHOW = {"×", "●", "○", "□"};
 	public static final int DO_NOTHING = 16;
 	public static final String SHOW_ALL_FILTER = "a";
+	//word parts define
+	public static final int WORD_LEVEL = 16;
+	public static final int WORD_JP = 17;
+	public static final int WORD_CN = 18;
+	public static final int WORD_HANZI = 19;
+	public static final int WORD_TYPE = 20;
+	public static final int WORD_UNIT = 21;
+	public static final int WORD_ID = 22;
 }
