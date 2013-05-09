@@ -1,19 +1,19 @@
 ----------------------------------------------------------------
-Thu May 09 10:30:19 JST 2013:
-Derby僶乕僕儑儞The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): 僀儞僗僞儞僗a816c00e-013e-86e9-0a12-000000e68198傪
-file:/D:/Program%20Files/db-derby-10.10.1.1-bin/lib/derby.jar偐傜儘乕僪偝傟偨僋儔僗丒儘乕僟乕sun.misc.Launcher$AppClassLoader@61de33偵傛傝
-僨乕僞儀乕僗丒僨傿儗僋僩儕C:\Users\base\Documents\GitHub\japan\derbydb\jpdb忋偱僽乕僩偟偰偄傑偡
+Thu May 09 17:14:52 JST 2013:
+正在使用类加载程序 sun.misc.Launcher$AppClassLoader@addbf1 引导数据库
+目录 C:\Users\base\Documents\GitHub\japan\derbydb\jpdb 中的 Derby 版本 The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268) 实例 a816c00e-013e-885b-68ab-000000df19c8
+已从 file:/D:/sgq/jpword/db-derby-10.10.1.1-bin/lib/derby.jar 加载
 java.vendor=Sun Microsystems Inc.
-java.runtime.version=1.6.0_41-b02
+java.runtime.version=1.6.0_39-b04
 user.dir=C:\Users\base\Documents\GitHub\japan\derbydb
 os.name=Windows 7
 os.arch=x86
 os.version=6.1
 derby.system.home=null
-僨乕僞儀乕僗丒僋儔僗丒儘乕僟乕偑奐巒偝傟傑偟偨 - derby.database.classpath=''
+数据库类加载程序已启动 - derby.database.classpath=''
 ----------------------------------------------------------------
-Thu May 09 10:31:18 JST 2013: Derby僄儞僕儞傪掆巭偟偰偄傑偡
+Thu May 09 17:16:42 JST 2013：正在关闭 Derby 引擎
 ----------------------------------------------------------------
-Thu May 09 10:31:18 JST 2013:
-僋儔僗丒儘乕僟乕sun.misc.Launcher$AppClassLoader@61de33傪帩偮僨乕僞儀乕僗丒僨傿儗僋僩儕C:\Users\base\Documents\GitHub\japan\derbydb\jpdb偺僀儞僗僞儞僗a816c00e-013e-86e9-0a12-000000e68198傪掆巭偟偰偄傑偡
+Thu May 09 17:16:42 JST 2013:
+正在使用类加载程序 sun.misc.Launcher$AppClassLoader@addbf1 关闭数据库目录 C:\Users\base\Documents\GitHub\japan\derbydb\jpdb 上的实例 a816c00e-013e-885b-68ab-000000df19c8
 ----------------------------------------------------------------

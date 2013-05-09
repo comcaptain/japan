@@ -103,6 +103,7 @@ public class CommandExecutor {
 			listWords();
 		}
 		else if (command.equals("s")) {
+			status.wordCount();
 			return JPWordConstants.SKIP;
 		}
 		else if (command.equals("pause")) {

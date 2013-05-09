@@ -62,7 +62,7 @@ public class JPWordDao {
 				sql += " and level is NULL";
 			}
 			else {
-				sql += " and level in " + DBUtil.getDerbyArray(levelList);
+				sql += " and (" + DBUtil.getDerbyLikeArray("level", levelList) + ")";
 			}
 		}
 		Statement stmt = conn.createStatement();

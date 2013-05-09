@@ -13,8 +13,11 @@ public class RemStatusBean {
 		return levelCount.length;
 	}
 	public void addLevelCount(int level) {
-		wordCount++;
+		wordCount();
 		levelCount[level]++;
+	}
+	public void wordCount() {
+		wordCount++;
 	}
 	public int getWordCount() {
 		return wordCount;

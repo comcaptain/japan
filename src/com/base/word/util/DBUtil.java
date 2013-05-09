@@ -33,4 +33,19 @@ public class DBUtil {
 		String result = strBuffer.toString();
 		return result.substring(0, result.length() - 1) + ")";
 	}
+	public static String getDerbyLikeArray(String column, String[] strList) {
+		if (strList == null || strList.length == 0) return null;
+		StringBuffer strBuffer = new StringBuffer();
+		boolean isFirst = true;
+		for (String str: strList) {
+			if (isFirst) {
+				strBuffer.append(column + " like '" + str + "'");
+				isFirst = false;
+			}
+			else {
+				strBuffer.append(" or " + column + " like '" + str + "'");
+			}
+		}
+		return strBuffer.toString();
+	}
 }
