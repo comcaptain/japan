@@ -57,32 +57,35 @@ public class WordRemember {
 		clock.start();
 		boolean save = false;int i = 0;
 		while (i < words.length) {
-			if (showNext)
-				System.out.println(WordLogger.getWordStr(userConfig.getWordFilter(), words[i])); 
-			showNext = false;
-			String command = scanner.nextLine().trim();
-			if (command.equals("exit")) {
-				System.out.print("你确定不保存这次背诵的记录直接退出？y/n ");
-				if (scanner.nextLine().trim().equals("n")) save = true; 
-				break;
+			try {
+				if (showNext)
+					System.out.println(WordLogger.getWordStr(userConfig.getWordFilter(), words[i])); 
+				showNext = false;
+				String command = scanner.nextLine().trim();
+				if (command.equals("exit")) {
+					System.out.print("你确定不保存这次背诵的记录直接退出？y/n ");
+					if (scanner.nextLine().trim().equals("n")) save = true; 
+					break;
+				}
+				if (command.equals("save")) {
+					save = true;
+					break;
+				}
+				int result = executor.execute(command, words[i], status);
+				switch(result) {
+				case JPWordConstants.WORD_NEXT: case JPWordConstants.SKIP:
+					i++; showNext = true;
+				case JPWordConstants.CLOCK_PAUSE: case JPWordConstants.CLOCK_START:
+					showStatus(clock, words.length, i);
+					break;
+				case JPWordConstants.SHOW_ALL:
+					System.out.println(WordLogger.getWordStr(UserConfigBean.wordFilterAll, status.getCurrentShowWord()));
+					break;
+				case JPWordConstants.DO_NOTHING:
+					break;
+				}				
 			}
-			if (command.equals("save")) {
-				save = true;
-				break;
-			}
-			int result = executor.execute(command, words[i], status);
-			switch(result) {
-			case JPWordConstants.WORD_NEXT: case JPWordConstants.SKIP:
-				i++; showNext = true;
-			case JPWordConstants.CLOCK_PAUSE: case JPWordConstants.CLOCK_START:
-				showStatus(clock, words.length, i);
-				break;
-			case JPWordConstants.SHOW_ALL:
-				System.out.println(WordLogger.getWordStr(UserConfigBean.wordFilterAll, status.getCurrentShowWord()));
-				break;
-			case JPWordConstants.DO_NOTHING:
-				break;
-			}
+			catch (Exception e){e.printStackTrace();System.out.println("命令格式错了");}
 		}
 		if ((words.length > 0 && i == words.length) || save) {
 			executor.saveRecord(status);

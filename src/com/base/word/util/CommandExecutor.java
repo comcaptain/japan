@@ -23,6 +23,7 @@ public class CommandExecutor {
 		this.wordSet = wordSet;
 		this.paramCounts.put("-f", 1);
 		this.paramCounts.put("-fn", 1);
+		this.paramCounts.put("-id", 1);
 		this.paramCounts.put("-t", 0);
 		this.paramCounts.put("-sj", -2);
 		this.paramCounts.put("-sh", -2);
@@ -68,6 +69,10 @@ public class CommandExecutor {
 		status.setCurrentShowWord(word);
 		if (command.equals("-fn")) {
 			findN(word, params[1]);
+		}
+		if (command.equals("-id")) {
+			status.setCurrentShowWord(dao.getWordById(Integer.parseInt(params[1])));
+			return JPWordConstants.SHOW_ALL;
 		}
 		else if (command.equals("a")) {
 			return JPWordConstants.SHOW_ALL;

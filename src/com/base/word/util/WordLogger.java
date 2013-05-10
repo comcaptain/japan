@@ -16,28 +16,22 @@ public class WordLogger {
 		for (int wordPart: wordFilter) {
 			String temp = word.getString(wordPart);
 			int tempLength = getWordPartLength(temp, wordPart);
-			if (wordPart == JPWordConstants.WORD_TYPE) {
-				strBuff.append(temp + "\t  ");
-			}
-			else {
-				strBuff.append
-				(rightAdd
-					(temp, (maxLengths.get(wordPart) - tempLength + 4), ' ')
-				);				
-			}
+			strBuff.append
+			(rightAdd
+				(temp, (maxLengths.get(wordPart) - tempLength + 4), ' ')
+			);		
 		}
 		return strBuff.toString();
 	}
 	public static int getWordPartLength(String part, int wordPart) {
 		if (part == null) return 4;
-		switch(wordPart) {
-		case JPWordConstants.WORD_HANZI:
-		case JPWordConstants.WORD_CN:
-		case JPWordConstants.WORD_JP:
-		case JPWordConstants.WORD_LEVEL:
-			return part.length() * 2;
+		int count = 0;
+		for (char c: part.toCharArray()) {
+			String temp = c + "";
+			if (temp.matches("[0-9a-zA-Z_*().'\";:-=&%$#!\\<>,+/\\[\\]]")) count++;
+			else count += 2;
 		}
-		return part.length();
+		return count;
 	}
 	private static String rightAdd(String inputString, int count, char padChar) {
 		StringBuffer result = new StringBuffer(inputString == null ? "null" : inputString);
