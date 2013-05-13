@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Fri May 10 15:43:40 JST 2013:
-DerbyバージョンThe Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): インスタンスa816c00e-013e-8d2e-46f6-000000e78730を
+Mon May 13 10:15:21 JST 2013:
+DerbyバージョンThe Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): インスタンスa816c00e-013e-9b74-bcc4-000000e627b8を
 file:/D:/Program%20Files/db-derby-10.10.1.1-bin/lib/derby.jarからロードされたクラス・ローダーsun.misc.Launcher$AppClassLoader@61de33により
 データベース・ディレクトリC:\Users\base\Documents\GitHub\japan\derbydb\jpdb上でブートしています
 java.vendor=Sun Microsystems Inc.
@@ -11,9 +11,3 @@ os.arch=x86
 os.version=6.1
 derby.system.home=null
 データベース・クラス・ローダーが開始されました - derby.database.classpath=''
-----------------------------------------------------------------
-Fri May 10 15:59:19 JST 2013: Derbyエンジンを停止しています
-----------------------------------------------------------------
-Fri May 10 15:59:19 JST 2013:
-クラス・ローダーsun.misc.Launcher$AppClassLoader@61de33を持つデータベース・ディレクトリC:\Users\base\Documents\GitHub\japan\derbydb\jpdbのインスタンスa816c00e-013e-8d2e-46f6-000000e78730を停止しています
-----------------------------------------------------------------
