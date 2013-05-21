@@ -14,6 +14,7 @@ import com.base.word.util.DBUtil;
 
 public class JPWordDao {
 	private Connection conn;
+	private SqlExecutor sqlExecutor;
 	public JPWordDao() {
 		conn = DBUtil.getConnection();
 	}
@@ -38,6 +39,12 @@ public class JPWordDao {
 		JPWord result = getJPWord(stmt.executeQuery());
 		stmt.close();
 		return result;
+	}
+	public String executeSql(String sql) {
+		if (this.sqlExecutor == null) {
+			this.sqlExecutor = new SqlExecutor(this.conn);
+		}
+		return sqlExecutor.execute(sql);
 	}
 	private JPWord getJPWord(ResultSet rs) throws SQLException {
 		if (!rs.next()) return null;

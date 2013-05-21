@@ -15,7 +15,7 @@ public class WordLogger {
 		StringBuffer strBuff = new StringBuffer();
 		for (int wordPart: wordFilter) {
 			String temp = word.getString(wordPart);
-			int tempLength = getWordPartLength(temp, wordPart);
+			int tempLength = getWordPartLength(temp);
 			strBuff.append
 			(rightAdd
 				(temp, (maxLengths.get(wordPart) - tempLength + 4), ' ')
@@ -23,17 +23,17 @@ public class WordLogger {
 		}
 		return strBuff.toString();
 	}
-	public static int getWordPartLength(String part, int wordPart) {
+	public static int getWordPartLength(String part) {
 		if (part == null) return 4;
 		int count = 0;
 		for (char c: part.toCharArray()) {
 			String temp = c + "";
-			if (temp.matches("[0-9a-zA-Z_*().'\";:-=&%$#!\\<>,+/\\[\\]]")) count++;
+			if (temp.matches("[0-9a-z\\sA-Z_*().'\";:\\-=&%$#!\\<>,+/\\[\\]]")) count++;
 			else count += 2;
 		}
 		return count;
 	}
-	private static String rightAdd(String inputString, int count, char padChar) {
+	public static String rightAdd(String inputString, int count, char padChar) {
 		StringBuffer result = new StringBuffer(inputString == null ? "null" : inputString);
 		for (int i = 0; i < count; i++ ) {
 			result.append(padChar);

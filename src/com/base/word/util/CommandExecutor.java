@@ -22,6 +22,7 @@ public class CommandExecutor {
 		this.userConfig = userConfig;
 		this.wordSet = wordSet;
 		this.paramCounts.put("-f", 1);
+		this.paramCounts.put("sql", 1);
 		this.paramCounts.put("-fn", 1);
 		this.paramCounts.put("-id", 1);
 		this.paramCounts.put("-t", 0);
@@ -42,6 +43,11 @@ public class CommandExecutor {
 	
 	public int execute(String inputStr, JPWord word, RemStatusBean status) throws SQLException {
 		String[] params = inputStr.split(" +");
+		if (inputStr.startsWith("sql ")) {
+			params = new String[2];
+			params[0] = "sql";
+			params[1] = inputStr.substring(4);
+		}
 		String command = params[0].trim();
 		if (isNum(command)) {
 			int newLevel = Integer.parseInt(command);
@@ -107,6 +113,9 @@ public class CommandExecutor {
 		else if (command.equals("ls")) {
 			listWords();
 		}
+		else if (command.equals("sql")) {
+			System.out.println(dao.executeSql(params[1]));
+		}
 		else if (command.equals("s")) {
 			status.wordCount();
 			return JPWordConstants.SKIP;
@@ -161,7 +170,6 @@ public class CommandExecutor {
 	private void listWords() {
 		formatListWords(this.wordSet.getWords(), userConfig.getWordFilter());
 	}
-	
 	private void formatListWords(JPWord[] words, int[] wordFilter) {
 		HashMap<Integer, Integer> maxLengths = new HashMap<Integer, Integer>();
 		//取得单词各个显示部分的最大长度
@@ -169,7 +177,7 @@ public class CommandExecutor {
 			for (int wordPart: wordFilter) {
 				String value = word.getString(wordPart);
 				//因为null在屏幕上显示为null，所以取4
-				int length = WordLogger.getWordPartLength(value, wordPart);
+				int length = WordLogger.getWordPartLength(value);
 				if (maxLengths.get(wordPart) == null) {
 					maxLengths.put(wordPart, length);
 				}
