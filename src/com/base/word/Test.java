@@ -3,17 +3,7 @@ package com.base.word;
 
 public class Test {
 	public static void main(String[] args) {
-		int n = 10;
-		int limit = 10000;
-		int[] a = getRandomIntegers(n, limit);
-		int[] b = getRandomIntegers(n, limit);
-		System.out.println("original difference");
-		System.out.println(getDiff(a, b));
-		print(a, b);
-		while (!switchints(a, b));
-		System.out.println("result difference");
-		System.out.println(getDiff(a, b));
-		print(a, b);
+		System.out.println("1".startsWith(null));
 		
 	}
 	public static boolean switchints(int[] a, int[] b) {
