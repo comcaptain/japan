@@ -8,5 +8,8 @@
 			<attribute name="javadoc_location" value="jar:file:/D:/sgq/lib/jar/commons-lang3-3.1/commons-lang3-3.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/jackson-annotations-2.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-2.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-databind-2.3.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
