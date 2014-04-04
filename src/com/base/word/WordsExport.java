@@ -24,7 +24,7 @@ public class WordsExport {
 			exportData.put("hiragana", word.getJpWord());
 			exportData.put("kanji", word.getHanzi());
 			exportData.put("chinese", word.getCnWord());
-			exportData.put("lessonNo", word.getUnit());
+			exportData.put("lessonNo", Integer.parseInt(word.getUnit()));
 			exportData.put("type", word.getType());
 			exportList.add(exportData);
 		}

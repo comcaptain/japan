@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Fri Apr 04 18:32:43 JST 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0145-2c15-47bd-000007057890 
-on database directory /Users/base/git/japan/derbydb/jpdb with class loader sun.misc.Launcher$AppClassLoader@23b561a2 
+Fri Apr 04 18:40:27 JST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-0145-2c1c-5cfb-00000705e040 
+on database directory /Users/base/git/japan/derbydb/jpdb with class loader sun.misc.Launcher$AppClassLoader@713c817 
 Loaded from file:/Users/base/git/japan/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_51-b13
